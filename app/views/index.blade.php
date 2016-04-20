@@ -1,96 +1,90 @@
-
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="utf-8">
-<title>昆山科技竞赛报名系统</title> {{HTML::style('css/reset.css')}}
-{{HTML::style('css/style.css')}}
-
-<script>
-if(top!=this){
-　window.parent.location.href='./';
-}
-</script>
+<!DOCTYPE html>
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>环保创意作品展</title>
+{{HTML::style('css/normalize.css')}}
+{{--{{HTML::style('css/default.css')}}--}}
+<style type="text/css">
+    #gallery-wrapper {
+    position: relative;
+    max-width: 75%;
+    width: 75%;
+    margin:10px auto;
+    }
+    img.thumb {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    }
+    .white-panel {
+    position: absolute;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+    padding: 10px;
+    }
+    .white-panel h1 {
+    font-size: 1em;
+    }
+    .white-panel h1 a {
+    color: #A92733;
+    }
+    .white-panel:hover {
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+    margin-top: -5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    }
+</style>
+<!--[if IE]>
+    {{HTML::script("js/html5shiv.min.js")}}
+<![endif]-->
 </head>
-
 <body>
 
-	<!-- 头部 -->
-	<div id="top">
-		<em> 昆山科技竞赛报名系统 </em> <span class='user'> &nbsp;&nbsp;&nbsp;&nbsp;
-			{{Auth::user()->username}}</span> 
-	</div>
+<center>
+		{{HTML::image('images/logo.jpg')}}</center>
+	<table border="0" align="center" cellpadding="0" cellspacing="0" width="1024">
+	<tr><td align="right"> {{HTML::link('user/login', '登陆')}} </td></tr>
+	</table>
 
-	<!-- 左菜单 -->
-	<div id="left">
-		<div class="menu_box">
 
-			<div class="menu_block">
-				<h3 class="menu_block_h">比赛报名</h3>
-				<ul class="menu_block_ul">
-					{{--<li>{{HTML::link('user/leader/edit','领队/用餐')}}</li>--}}
-					{{--<li>{{HTML::link('teacher/list','添加教练')}}</li>--}}
-					<li>{{HTML::link('student/add','新报名')}}</li>
-					<li>{{HTML::link('student/list','已报名')}}</li>
+<section id="gallery-wrapper" style="height: 1558px;">
+	@foreach($students as $s)
+		<article class="white-panel r1 c0" style="width: 203.5px; left: 0px; top: 0px;">
+			{{HTML::image('pic/'.$s->id.'.jpg',null, ['class'=>'thumb'])}}
+			<h1><a>{{$s->production}}</a></h1>
+			<p>作者：{{$s->name}}</p>
+			<p>辅导：{{$s->teacher}}</p>
+			<p>学校：{{User::find($s->user_id)->username}}</p>
+		</article>
+	@endforeach
+</section>
 
-				</ul>
-			</div>
-			<div class="menu_block">
-				<h3 class="menu_block_h">用户管理</h3>
-				<ul class="menu_block_ul">
-					<li>{{HTML::link('user/editpwd','设置密码')}}</li>
-					<li>{{HTML::link('user/logout','退出',['target'=>"_top"])}}</li>
-				</ul>
-			</div>
+{{HTML::script("js/jquery.min.js")}}
+{{HTML::script("js/pinterest_grid.js")}}
+<script type="text/javascript">
+    $(function(){
+        $("#gallery-wrapper").pinterest_grid({
+            no_columns: 3,
+            padding_x: 10,
+            padding_y: 10,
+            margin_bottom: 50,
+            single_column_breakpoint: 700
+        });
 
-		</div>
-	</div>
-
-	<!-- 右边主体 -->
-	<div id="right">
-		<iframe id="main" frameborder="0" src=""></iframe>
-	</div>
-
-	<!-- js -->
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript">
-$(document).ready(function(e) {
-    // 高度自适应
-	function auto_width_height() {
-		var auto_width = $(window).width()- $('#left').outerWidth();
-		var auto_height = $(window).height() - $('#top').outerHeight();
-		$('#left').css('height', auto_height);
-		$('#main').css({"width": auto_width, "height": auto_height});
-	}
-	auto_width_height();
-	$(window).resize(function(e) {
-        auto_width_height();
     });
-	
-	// 菜单开关效果
-	$(".menu_block_h").click(function() {
-		if($(this).attr("class") == 'menu_block_h') {
-			$(this).addClass("close");
-			$(this).parent(".menu_block").children(".menu_block_ul").addClass("none");
-		} else {
-			$(this).removeClass("close");
-			$(this).parent(".menu_block").children(".menu_block_ul").removeClass("none");
-		}
-	});
-	
-	// 加载默认首页（默认加载菜单第一个链接）
-	$('.menu_block_ul li a').eq(0).addClass('cur');
-	$('#main').attr('src', $('.menu_block_ul li a').eq(0).attr('href'));
-	
-	// 点击菜单，iframe加载新页面
-	$('.menu_block_ul li a').click(function(e) {
-        $('.menu_block_ul li a').removeClass('cur');
-		$(this).addClass('cur');
-		$('#main').attr('src', $(this).attr('href'));
-		return false;
-    });
-});
 </script>
-
-</body>
-</html>
+{{HTML::script("js/AnimOnScroll.js")}}
+<script>
+    new AnimOnScroll( document.getElementById( 'gallery-wrapper' ), {
+        minDuration : 0.4,
+        maxDuration : 0.7,
+        viewportFactor : 0.2
+    } );
+</script>
+</body><div></div><div></div></html>

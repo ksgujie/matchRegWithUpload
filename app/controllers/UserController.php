@@ -31,7 +31,7 @@ class UserController extends BaseController {
 			if (Auth::user()->isadmin==1) {
 				return Redirect::to('admin');
 			} else {
-				return Redirect::to('/');
+				return Redirect::to('front');
 			}
 		} else {
 			return Redirect::to('user/login')->with('danger', '密码错误！');
@@ -41,7 +41,7 @@ class UserController extends BaseController {
 	
 	public function getLogout() {
 		Auth::logout();
-		return Redirect::to('/');
+		return Redirect::to('front');
 	}
 	
 	public function getEditpwd() {

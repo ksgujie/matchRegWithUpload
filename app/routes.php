@@ -1,6 +1,6 @@
 <?php
 
-Route::get('test', 'TestController@getImportusers');
+Route::get('/', 'StudentController@frontlist');
 
 Route::get('user/logout','UserController@getLogout');
 Route::get('user/login','UserController@getLogin');
@@ -8,7 +8,7 @@ Route::post('user/login','UserController@postLogin');
 
 Route::group(array('before' => 'auth'), function()
 {
-	Route::get('/', 'MainController@index');
+	Route::get('front', 'MainController@index');
 	Route::get('user/editpwd','UserController@getEditpwd');
 	Route::post('user/editpwd','UserController@postEditpwd');
 });

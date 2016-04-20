@@ -6,7 +6,7 @@ class MainController extends BaseController {
 		if (Auth::user()->isadmin=='1') {
 			return Redirect::to('admin');
 		}
-		return View::make('index');
+		return View::make('front');
 	}
 
 }

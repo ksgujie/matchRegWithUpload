@@ -4,6 +4,15 @@ use Illuminate\Support\Facades\Redirect;
 class StudentController extends BaseController {
 	
 // 	protected $fillable = ['*'];
+	
+	/**
+	 * 首页
+	 * @return mixed
+	 */
+	public function frontlist()
+	{
+		return View::make('index')->with('students', Student::all());
+	}
 
 	public function getAdd()
 	{
@@ -14,14 +23,16 @@ class StudentController extends BaseController {
 		//处理上传失败的各种情况
 		$errMsg = '';
 		$file = Input::file('pic');
-		$mime = $file->getMimeType();
-		$size = $file->getSize();
-		if (!$file->isValid()) {
-			$errMsg='上传失败，请重试';
-		} elseif (strtolower($mime) !== 'image/jpeg') {
-			$errMsg='文件格式不正确，只能上传JPG格式的图片！';
-		} elseif ($size > 300 * 1024 * 1024) {
-			$errMsg='文件超过300kb，请压缩后重新上传';
+		if ($file->isValid()) {
+			$mime = $file->getMimeType();
+			$size = $file->getSize();
+			if (strtolower($mime) !== 'image/jpeg') {
+				$errMsg = '文件格式不正确，只能上传JPG格式的图片！';
+			} elseif ($size > 300 * 1024) {
+				$errMsg = '文件超过300kb，请调整后重新上传';
+			}
+		} else {
+			$errMsg = '上传失败，请检查文件大小后重试';
 		}
 
 		if (strlen($errMsg)) {
@@ -114,6 +125,10 @@ class StudentController extends BaseController {
 	
 	public function getDel($id) {
 		Student::where('id', $id)->where('user_id', Auth::user()->id)->delete();
+		$pic = public_path("pic/$id.jpg");
+		if (is_file($pic)) {
+			unlink($pic);
+		}
 		return Redirect::to('student/list')->with('message', '选手删除成功!');
 	}
 	
