@@ -49,7 +49,7 @@
 <center>
 		{{HTML::image('images/logo.jpg')}}</center>
 	<table border="0" align="center" cellpadding="0" cellspacing="0" width="1024">
-	<tr><td align="right"> {{HTML::link('user/login', '登陆')}} </td></tr>
+	<tr><td align="right"> {{HTML::link('user/login', '上传作品')}} </td></tr>
 	</table>
 
 
