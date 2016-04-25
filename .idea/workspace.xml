@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dbe6a0e0-1743-496b-bf2a-7b2426daa429" name="默认的" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/index.blade.php" afterPath="$PROJECT_DIR$/app/views/index.blade.php" />
-    </list>
+    <list default="true" id="dbe6a0e0-1743-496b-bf2a-7b2426daa429" name="默认的" comment="" />
     <ignored path="laravel_baoming.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -244,15 +241,15 @@
       <option name="presentableId" value="Default" />
       <updated>1393200471699</updated>
       <workItem from="1461163408052" duration="5817000" />
-      <workItem from="1461591163515" duration="749000" />
+      <workItem from="1461591163515" duration="1348000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6566000" />
+    <option name="totallyTimeSpent" value="7165000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20758928" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
